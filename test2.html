@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Scanner & Analyzer</title>
+</head>
+<body>
+    <h1>Image Scanner & Analyzer</h1>
+    
+    <div>
+        <button id="startScan">Start Scanning</button>
+        <button id="stopScan" style="display: none;">Stop Scanning</button>
+    </div>
+
+    <video id="cameraFeed" autoplay></video>
+    <canvas id="capturedImage" style="display: none;"></canvas>
+    <img id="analyzedImage" style="display: none;" src="" alt="Analyzed Image">
+    <div id="analysisResult"></div>
+
+    <script>
+        const startScanButton = document.getElementById('startScan');
+        const stopScanButton = document.getElementById('stopScan');
+        const cameraFeed = document.getElementById('cameraFeed');
+        const capturedImage = document.getElementById('capturedImage');
+        const analyzedImage = document.getElementById('analyzedImage');
+        const analysisResult = document.getElementById('analysisResult');
+        let stream;
+        let isScanning = false;
+
+        // Start scanning when the "Start Scanning" button is clicked
+        startScanButton.addEventListener('click', async () => {
+            try {
+                // Get access to the user's camera
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                cameraFeed.srcObject = stream;
+
+                startScanButton.style.display = 'none';
+                stopScanButton.style.display = 'inline-block';
+
+                isScanning = true;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        });
+
+        // Stop scanning when the "Stop Scanning" button is clicked
+        stopScanButton.addEventListener('click', () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                cameraFeed.srcObject = null;
+            }
+
+            startScanButton.style.display = 'inline-block';
+            stopScanButton.style.display = 'none';
+
+            isScanning = false;
+        });
+
+        // Capture an image from the camera feed
+        async function captureImage() {
+            const context = capturedImage.getContext('2d');
+            capturedImage.width = cameraFeed.videoWidth;
+            capturedImage.height = cameraFeed.videoHeight;
+            context.drawImage(cameraFeed, 0, 0, capturedImage.width, capturedImage.height);
+            return new Promise(resolve => {
+                capturedImage.toBlob(blob => {
+                    resolve(blob);
+                }, 'image/jpeg');
+            });
+        }
+
+        // Analyze the captured image (you would need to send it to a backend for analysis)
+        async function analyzeCapturedImage() {
+            if (isScanning) {
+                const capturedBlob = await captureImage();
+                analyzedImage.src = URL.createObjectURL(capturedBlob);
+                analyzedImage.style.display = 'block';
+
+                // Retrieve image details
+                const imageSize = capturedBlob.size;
+                const imageType = capturedBlob.type;
+                const imageWidth = capturedImage.width;
+                const imageHeight = capturedImage.height;
+
+                // Display image details
+                const details = `Image Size: ${imageSize} bytes<br>Image Type: ${imageType}<br>Image Dimensions: ${imageWidth} x ${imageHeight}`;
+                analysisResult.innerHTML = details;
+            }
+        }
+
+        // Periodically analyze the captured image (adjust the interval as needed)
+        setInterval(analyzeCapturedImage, 5000);
+    </script>
+</body>
+</html>

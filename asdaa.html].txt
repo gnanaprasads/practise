@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<head>
+<title>demo</title>
+<body>
+<form>
+<input type="text" placeholder="Enter your name;"autofocus><br><br>
+<input type="radio">Male
+<input type="radio">FeMale<br><br>
+<input type="date">DOB<br><br>
+<input type="checkbox">kannada
+<input type="checkbox">kannada
+<input type="checkbox">kannada
+<br><br>
+<select name="select ">
+<option value>...select...</option>
+<option value>1</option>
+<option value>2</option>
+<option value>3</option>
+<option value>4</option><br><br>
+<input type="submit">
+<input type="reset">

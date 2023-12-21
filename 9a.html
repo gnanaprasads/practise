@@ -1,0 +1,59 @@
+
+<html>
+<head>
+<title>promt</title>
+</head>
+
+<body>
+<script type="text/javascript">
+var str=prompt("Enter the value");
+if(!(isNaN(str)))
+{
+var rev=0,num,remainder;
+num=parseInt(str);
+while(num!=0)
+{
+remainder=num%10;
+num=parseInt(num/10);
+rev=rev*10+remainder;
+}
+if(rev==str)
+{
+alert("The number"+str+" is palindrome and reverse is"+rev);
+}
+else
+{
+alert("Not palindrome");
+}
+}
+else
+{
+str=str.toUpperCase();
+for(var i=0;i<str.length;i++)
+{
+var chr=str.charAt(i);
+if(chr=='O'||chr=='I'||chr=='E'||chr=='A'||chr=='U')
+{
+break;
+}
+}
+if(i<str.length)
+{
+alert("The element found at position"+(i+1));
+}
+else
+{
+alert("Vowel not found")
+}
+}
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

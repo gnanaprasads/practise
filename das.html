@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>dclock</title>
+<style>
+#demo
+{
+color:red;
+background-color:black;
+border-radius:15px;
+font-weight:bold;
+font-family:cursive;
+margin:auto;
+margin-top:15px;
+padding:60px;
+border-radius:1px
+}
+</style>
+</head>
+
+<body>
+<h1>Digital clock</h1>
+<hr><hr>
+
+<div id="demo"></div>
+<script>
+var myVar=setInterval(myTimer,1000);
+function myTimer()
+{
+var d=newDate();
+document.getElementById("demo").InnerHTML=d.toLocaleTimeString();
+}
+
+</script>
+
+

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>simple calculator</title>
+   
+    <style>
+        table,tr,td{
+            height: 50%;
+            width: 50%;
+            margin:auto;
+            background-color: lightgray;
+            border-style:solid;
+            border-radius: 5%;
+            border-color: black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        table{
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        function fns(idd)
+        {
+            var val1=parseFloat(document.getElementById("value1").value);
+            var val2=parseFloat(document.getElementById("value2").value);
+            if(isNaN(val1)||isNaN(val2))
+            alert("check value");
+            else if(idd=="add")
+            document.getElementById("answer").value=val1+val2;
+            else if(idd=="sub")
+            document.getElementById("answer").value=val1-val2;
+            else if(idd=="mul")
+            document.getElementById("answer").value=val1*val2;
+            else if(idd=="div")
+            document.getElementById("answer").value=val1/val2;
+        }
+        function clr()
+        {
+            value1.value="0";
+            value2.value="0";
+            answer.value=" ";
+        }
+    </script>
+</head>
+    <body>
+        <table>
+            <tr><th colspan="4">Simple Calculator</th></tr>
+            <tr>
+                <td>Value1</td>
+                <td><input type="text"id="value1"value="0"/></td>
+                <td>Value2</td>
+                <td><input type="text"id="value2"value="0"/></td>
+            </tr>
+            <tr>
+                <td><input type="button"value="Addition"id="add"onclick="fns(this.id)"/></td>
+                <td><input type="button"value="Subtraction"id="sub"onclick="fns(this.id)"/></td>
+                <td><input type="button"value="Multiplication"id="mul"onclick="fns(this.id)"/></td>
+                <td><input type="button"value="Division"id="div"onclick="fns(this.id)"/></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="Clear all" id="clr"onclick="clr()"/></td>
+                <td>Answer😁</td>
+                <td colspan="2"><input type="text" id="answer" value=" "  disabled/></td>
+                
+                
+            </tr>
+        </table>
+    </body>
+</html>

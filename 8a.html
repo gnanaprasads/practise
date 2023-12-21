@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>dclock</title>
+<style>
+#demo
+{
+color:red;
+background-color:black;
+border-radius:15px;
+font-weight:bold;
+font-family:algerian;
+margin:auto;
+margin-top:15px;
+padding:60px;
+border-radius:1px;
+text-align:center;
+font-size:30px;
+}
+</style>
+</head>
+
+<body>
+<h1>Digital clock</h1>
+<hr><hr>
+
+<div id="demo"></div>
+
+<script>
+
+var d=new Date();
+document.getElementById("demo").innerHTML=d.toLocaleDateString();
+
+</script>
+
+
